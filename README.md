@@ -2,21 +2,17 @@
 A simple class that leverages the power of Auto Layout to make `UIStackView` scrollable.
 
 - 📚 A normal `UIStackView`, but scrollable.
-
 - 👶 Easy-to-understand codebase (< 100 lines of code) 
-
 - 🎉 No external dependencies.
 
 ## ⚙️ Installation 
 Download [ScrollableStackView](https://github.com/jdisho/ScrollableStackView/blob/master/ScrollableStackView/ScrollableStackView.swift) and manually import the file into your project.
 
 ## 📚 Usage
-```swift 
-let stackView: ScrollableStackView()
-```
-
+ 
 - Manage arranged subviews
   ```swift 
+   let stackView: ScrollableStackView()
   stackView.stack(...)
   ```
  - Configure the layout
