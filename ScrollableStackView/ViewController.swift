@@ -38,7 +38,7 @@ class ViewController: UIViewController {
     private lazy var roundedViews: [UIView] = {
         return (0...20).map { _ in
             let view = UIView()
-            view.backgroundColor = .gray
+            view.backgroundColor = UIColor.random
             view.translatesAutoresizingMaskIntoConstraints = false
             view.widthAnchor.constraint(equalToConstant: 64.0).isActive = true
             view.heightAnchor.constraint(equalToConstant: 64.0).isActive = true
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         return (0...20).map { i in
             let view = ScrollableStackView()
             view.axis = .vertical
-            view.backgroundColor = .gray
+            view.backgroundColor =  UIColor.random
             view.translatesAutoresizingMaskIntoConstraints = false
             var height: CGFloat = 100
             if i % 2 == 0 {
@@ -88,8 +88,8 @@ class ViewController: UIViewController {
             ])
         }
 
-        hStackView.stack(roundedViews)
-        vStackView.stack(squaredViews)
+        hStackView.addArrangedSubviews(roundedViews)
+        vStackView.addArrangedSubviews(squaredViews)
 
         containerStackView.addArrangedSubview(hStackView)
         containerStackView.addArrangedSubview(vStackView)

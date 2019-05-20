@@ -43,16 +43,24 @@ class ScrollableStackView: UIScrollView {
         }
     }
 
-    private let stackView = UIStackView()
+    var arrangedSubviews: [UIView] {
+        return stackView.arrangedSubviews
+    }
 
+    private let stackView = UIStackView()
     private var stackViewWidthConstraint = NSLayoutConstraint()
     private var stackViewHeightConstraint = NSLayoutConstraint()
+
+    init(arrangedSubviews: [UIView]) {
+        super.init(frame: .zero)
+
+        addArrangedSubviews(arrangedSubviews)
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         backgroundColor = .white
-
         configureStackView()
     }
 
@@ -60,16 +68,24 @@ class ScrollableStackView: UIScrollView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func stack(_ views: [UIView]) {
-        views.forEach { stack($0) }
-    }
-
-    func stack(_ views: UIView...) {
-        views.forEach { stack($0) }
-    }
-
-    private func stack(_ view: UIView) {
+    func addArrangedSubview(_ view: UIView) {
         stackView.addArrangedSubview(view)
+    }
+
+    func addArrangedSubviews(_ views: [UIView]) {
+        views.forEach { addArrangedSubview($0) }
+    }
+
+    func removeArrangedSubview(_ view: UIView) {
+        stackView.removeArrangedSubview(view)
+    }
+
+    func removeArrangedSubviews(_ views: [UIView]) {
+        views.forEach { removeArrangedSubview($0) }
+    }
+
+    func insertArrangedSubview(_ view: UIView, at stackIndex: Int) {
+        stackView.insertArrangedSubview(view, at: stackIndex)
     }
 
     private func configureStackView() {
@@ -86,7 +102,7 @@ class ScrollableStackView: UIScrollView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor)
-        ])
+            ])
 
         stackViewWidthConstraint = stackView.widthAnchor.constraint(equalTo: widthAnchor)
         stackViewHeightConstraint = stackView.heightAnchor.constraint(equalTo: heightAnchor)
